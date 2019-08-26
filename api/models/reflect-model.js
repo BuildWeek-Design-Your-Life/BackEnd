@@ -4,6 +4,8 @@ module.exports = {
     findAllReflect,
     findUserRefl,
     add,
+    updateRelf,
+
 };
 
 function findAllReflect() {
@@ -18,4 +20,10 @@ function findUserRefl(id) {
 function add(body) {
     return db('reflect')
         .insert(body)
+}
+
+function updateRelf(id, changes) {
+    return db('reflect')
+        .where({id})
+        .update(changes)
 }

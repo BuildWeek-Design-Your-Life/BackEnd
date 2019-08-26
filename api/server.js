@@ -17,7 +17,7 @@ server.use(express.json());
 //authRouter ensures users are registered and logged in with a token
 server.use('/api/auth', authRouter);
 server.use('/api', authenticate, userRouter )
-server.use('/api/act', authenticate, activityRouter)
+server.use('/api/activity', authenticate, activityRouter)
 server.use('/api/reflect', authenticate, reflectRouter)
 
 module.exports = server;

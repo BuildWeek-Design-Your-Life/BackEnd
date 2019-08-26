@@ -52,4 +52,22 @@ server.post('/', restricted, async(req, res) => {
     }
 });
 
+// update an activity log based off params id. Params id refers to the object id inside the array
+server.put('/:id', restricted, async(req, res) => {
+    try {
+        const { id } = req.params;
+        let {users_ref_id, trends, insights, summary} = req.body
+        if ( id && req.body ) {
+            const store = await Users.findUserAct(id)
+            const updatedLog = await Users.updateAct(id, req.body)
+            res.status(201).json({message: 'Update Successful!'})
+        } else {
+            res.status(404).json({message: 'May be missing something in your body or bad id'})
+        }
+    }
+    catch (err) {
+        res.status(500).json({message: 'server error'})
+    }
+});
+
 module.exports = server

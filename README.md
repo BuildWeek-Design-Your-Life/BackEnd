@@ -70,13 +70,14 @@ ___
 | ------------------- | ----------- |
 | [GET All Users](#get-users)       | `/api/users` |
 | [GET User by ID](#get-user-by-id) | `/api/users/:id` |
-| [GET Activity Logs](#get-activity-log)       | `/api/act` |
-| [GET Activity Logs by ID](#get-activity-log-by-id)       | `/api/act/:id` |
-| [GET Reflect Logs](#get-reflect-log)       | `/api/ref` |
-| [GET Reflect Logs by ID](#get-reflect-log-by-id)       | `/api/ref/:id` |
-| [POST Activity Logs](#post-activity-log)       | `/api/act` |
-| [POST Reflection Logs](#post-reflection-log)       | `/api/ref` |
-
+| [GET Activity Logs](#get-activity-log)       | `/api/activity` |
+| [GET Activity Logs by ID](#get-activity-log-by-id)       | `/api/activity/:id` |
+| [GET Reflect Logs](#get-reflect-log)       | `/api/reflect` |
+| [GET Reflect Logs by ID](#get-reflect-log-by-id)       | `/api/reflect/:id` |
+| [POST Activity Logs](#post-activity-log)       | `/api/activity` |
+| [POST Reflection Logs](#post-reflection-log)       | `/api/reflect` |
+| [PUT Activity Log by ID](#put-activity-log-by-id)       | `/api/activity/:id` |
+| [PUT Reflection Log by ID](#put-reflection-log-by-id)       | `/api/reflect/:id` |
 
 ### [GET] Users
 
@@ -118,7 +119,7 @@ Returns: an object with user id, username, password, and email. Null means no em
 ---
 ### [GET] Activity Log
 
-#### URL: https://design-bw.herokuapp.com/api/act
+#### URL: https://design-bw.herokuapp.com/api/activity
 
 Returns: all activity logs in **an array of objects** with user id, activity, engagement, and energize
 > users_act_id means which log the log belongs to, so users_act_id: 1 belongs to a user with id of 1.
@@ -150,7 +151,7 @@ Returns: all activity logs in **an array of objects** with user id, activity, en
 ---
 ### [GET] Activity Log By ID
 
-#### URL: https://design-bw.herokuapp.com/api/act/:id
+#### URL: https://design-bw.herokuapp.com/api/activity/:id
 
 Returns: all activity logs in **an array of objects** with user id, activity, engagement, and energize for a specific user
 > users_act_id should be same for all returned logs as they should belong to one user.
@@ -175,7 +176,7 @@ Returns: all activity logs in **an array of objects** with user id, activity, en
 ---
 ### [GET] Reflect Log
 
-#### URL: https://design-bw.herokuapp.com/api/ref
+#### URL: https://design-bw.herokuapp.com/api/reflect
 
 Returns: all reflection logs in **an array of objects** with user id, trends, insights, and summary
 > users_ref_id means which log the log belongs to, so users_ref_id: 1 belongs to a user with id of 1.
@@ -208,7 +209,7 @@ Returns: all reflection logs in **an array of objects** with user id, trends, in
 ---
 ### [GET] Reflect Log By ID
 
-#### URL: https://design-bw.herokuapp.com/api/ref/:id
+#### URL: https://design-bw.herokuapp.com/api/reflect/:id
 
 Returns: all reflection logs in **an array of objects** with user id, trends, insights, and summary for a specified user.
 > users_ref_id should be same for all returned logs as they should belong to one user.
@@ -241,7 +242,7 @@ Returns: all reflection logs in **an array of objects** with user id, trends, in
 ---
 ### [POST] Activity Log
 
-#### URL: https://design-bw.herokuapp.com/api/act
+#### URL: https://design-bw.herokuapp.com/api/activity
 Payload: an object with the following, **all are required**.
 > the users_act_id is to let the database know who the activity log belongs to. 
 ```
@@ -264,7 +265,7 @@ Returns:
 
 ### [POST] Reflect Log
 
-#### URL: https://design-bw.herokuapp.com/api/ref
+#### URL: https://design-bw.herokuapp.com/api/reflect
 Payload: an object with the following, **all but summary are required**.
 > the users_ref_id is to let the database know who the reflection log belongs to. 
 ```
@@ -281,6 +282,52 @@ Returns:
 ```
 {
     "message": "Post Successful!"
+}
+```
+---
+
+
+### [PUT] Activity Log By ID
+
+#### URL: https://design-bw.herokuapp.com/api/activity/:id
+Payload: an object with the following, **all are required**.
+> id from params will select the object within the array(use a get for ALL activity logs to see which will be targeted).
+```
+{
+    "users_act_id": 2,
+    "activity": "coding",
+    "engagement": 7,
+    "energize": 7
+}
+```
+
+Returns: 
+
+```
+{
+    "message": "Update Successful!"
+}
+```
+---
+### [PUT] Reflection Log By ID
+
+#### URL: https://design-bw.herokuapp.com/api/reflect/:id
+Payload: an object with the following, **all but summary are required**.
+> id from params will select the object within the array(use a get for ALL reflection logs to see which will be targeted).
+```
+{
+	"users_ref_id": 1,
+	"trends": "Getting Better at Programming", 
+	"insights": "I'm learning quick" , 
+	"summary": "If I keep this weeks programming up I can be a developer in no time"
+}
+```
+
+Returns: 
+
+```
+{
+    "message": "Update Successful!"
 }
 ```
 ---

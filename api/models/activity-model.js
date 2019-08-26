@@ -4,6 +4,7 @@ module.exports = {
     findAllAct,
     findUserAct,
     add,
+    updateAct
 };
 
 function findAllAct() {
@@ -18,4 +19,10 @@ function findUserAct(id) {
 function add(body) {
     return db('activity')
         .insert(body)
+}
+
+function updateAct(id, changes) {
+    return db('activity')
+        .where({id})
+        .update(changes)
 }
