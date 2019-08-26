@@ -18,5 +18,4 @@ function findUserAct(id) {
 function add(body) {
     return db('activity')
         .insert(body)
-        .returning(body)
 }

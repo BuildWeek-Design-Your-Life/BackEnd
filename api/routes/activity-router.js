@@ -41,8 +41,8 @@ server.post('/', restricted, async(req, res) => {
         let {users_act_id, activity, engagement, energize} = req.body
         if (req.body) {
             const newActLog = await Users.add(req.body)
-             res.status(201).json({message: 'Post Successful!' , new_Activity_Log: newActLog}) //supposed to return id of users_act_id
-            //res.status(201).json({message: 'Post Successful!'})
+            //res.status(201).json({message: 'Post Successful!' , new_Activity_Log: newActLog}) //supposed to return id of users_act_id
+            res.status(201).json({message: 'Post Successful!'})
         } else {
             res.status(404).json({message: 'May be missing something in your body'})
         }
