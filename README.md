@@ -78,6 +78,8 @@ ___
 | [POST Reflection Logs](#post-reflection-log)       | `/api/reflect` |
 | [PUT Activity Log by ID](#put-activity-log-by-id)       | `/api/activity/:id` |
 | [PUT Reflection Log by ID](#put-reflection-log-by-id)       | `/api/reflect/:id` |
+| [DEL Activity Log by ID](#del-activity-log-by-id)       | `/api/activity/:id` |
+| [DEL Reflection Log by ID](#del-reflection-log-by-id)       | `/api/reflect/:id` |
 
 ### [GET] Users
 
@@ -328,6 +330,32 @@ Returns:
 ```
 {
     "message": "Update Successful!"
+}
+```
+---
+### [DEL] Activity Log By ID
+
+#### URL: https://design-bw.herokuapp.com/api/activity/:id
+> id from params will select the object within the array(use a get for ALL activity logs to see which will be targeted).
+
+Returns: 1 means true
+
+```
+{
+    "removed": 1
+}
+```
+---
+### [DEL] Reflection Log By ID
+
+#### URL: https://design-bw.herokuapp.com/api/reflect/:id
+> id from params will select the object within the array(use a get for ALL reflection logs to see which will be targeted)
+
+Returns: 1 means true
+
+```
+{
+    "removed": 1
 }
 ```
 ---

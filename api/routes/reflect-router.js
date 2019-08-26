@@ -9,7 +9,7 @@ const restricted = require('../../middleware/authenticate');
 
 // return all reflection logs
 server.get('/', restricted, (req, res) => {
-    Users.findAllReflect()
+    Users.AllReflect()
         .then(users => {
             res.json(users);
         })
@@ -21,7 +21,7 @@ server.get('/', restricted, (req, res) => {
 //return user specific logs
 server.get('/:id', restricted, async(req, res) => {
     try {
-        const id = await Users.findUserRefl(req.params.id)
+        const id = await Users.UserRefl(req.params.id)
         if (id) {
             res.status(200).json(id)
         } else {
@@ -58,8 +58,8 @@ server.put('/:id', restricted, async(req, res) => {
         const { id } = req.params;
         let {users_ref_id, trends, insights, summary} = req.body
         if ( id && req.body ) {
-            const store = await Users.findUserRefl(id)
-            const updatedLog = await Users.updateRelf(id, req.body)
+            const store = await Users.UserRefl(id)
+            const updatedLog = await Users.update(id, req.body)
             res.status(201).json({message: 'Update Successful!'})
         } else {
             res.status(404).json({message: 'May be missing something in your body or bad id'})
@@ -67,6 +67,20 @@ server.put('/:id', restricted, async(req, res) => {
     }
     catch (err) {
         res.status(500).json({message: 'server error'})
+    }
+});
+
+server.delete('/:id', async (req, res) => {    
+    try {
+        const { id } = req.params;
+        const deleted = await Users.remove(id);
+        if (deleted) {
+            res.json({ removed: deleted });
+        } else {
+            res.status(404).json({ message: 'Bad ID, or client error' });
+        }
+    } catch (err) {
+    res.status(500).json({ message: `Failed to delete log ${id}` });
     }
 });
 

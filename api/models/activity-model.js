@@ -1,17 +1,18 @@
 const db = require('../../database/dbConfig');
 
 module.exports = {
-    findAllAct,
-    findUserAct,
+    AllAct,
+    UserAct,
     add,
-    updateAct
+    update,
+    remove,
 };
 
-function findAllAct() {
+function AllAct() {
     return db('activity').select('id', 'users_act_id', 'activity', 'engagement', 'energize');
 }
 
-function findUserAct(id) {
+function UserAct(id) {
     return db('activity')
         .where({'users_act_id':id})
 }
@@ -21,8 +22,12 @@ function add(body) {
         .insert(body)
 }
 
-function updateAct(id, changes) {
+function update(id, changes) {
     return db('activity')
         .where({id})
         .update(changes)
+}
+
+function remove(id) {
+    return db('activity').where({ id }).delete(id)
 }
