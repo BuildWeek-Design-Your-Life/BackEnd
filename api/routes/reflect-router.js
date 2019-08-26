@@ -40,11 +40,29 @@ server.post('/', restricted, async(req, res) => {
         // const body = {users_ref_id, trends, insights, summary}
         let {users_ref_id, trends, insights, summary} = req.body
         if (req.body) {
-            const newRelfectLog = await Users.add(req.body)
-            // res.status(201).json({message: 'Post Successful!' , newRelfectLog: `the new users_ref_id is: ${newRelfectLog}`}) supposed to return id of users_ref_id
+            const newLog = await Users.add(req.body)
+            // res.status(201).json({message: 'Post Successful!' , newLog)}
             res.status(201).json({message: 'Post Successful!'})
         } else {
             res.status(404).json({message: 'May be missing something in your body'})
+        }
+    }
+    catch (err) {
+        res.status(500).json({message: 'server error'})
+    }
+});
+
+// update a reflection log based off params id. Params id refers to the object id inside the array
+server.put('/:id', restricted, async(req, res) => {
+    try {
+        const { id } = req.params;
+        let {users_ref_id, trends, insights, summary} = req.body
+        if ( id && req.body ) {
+            const store = await Users.findUserRefl(id)
+            const updatedLog = await Users.updateRelf(id, req.body)
+            res.status(201).json({message: 'Update Successful!'})
+        } else {
+            res.status(404).json({message: 'May be missing something in your body or bad id'})
         }
     }
     catch (err) {
