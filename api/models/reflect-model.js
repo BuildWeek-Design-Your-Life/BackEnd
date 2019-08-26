@@ -1,18 +1,18 @@
 const db = require('../../database/dbConfig');
 
 module.exports = {
-    findAllReflect,
-    findUserRefl,
+    AllReflect,
+    UserRefl,
     add,
-    updateRelf,
-
+    update,
+    remove,
 };
 
-function findAllReflect() {
+function AllReflect() {
     return db('reflect').select('id', 'users_ref_id', 'trends', 'insights', 'summary');
 }
 
-function findUserRefl(id) {
+function UserRefl(id) {
     return db('reflect')
         .where({'users_ref_id':id})
 }
@@ -22,8 +22,12 @@ function add(body) {
         .insert(body)
 }
 
-function updateRelf(id, changes) {
+function update(id, changes) {
     return db('reflect')
         .where({id})
         .update(changes)
+}
+
+function remove(id) {
+    return db('reflect').where({ id }).delete(id)
 }
