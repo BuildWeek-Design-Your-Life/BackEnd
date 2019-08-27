@@ -18,6 +18,6 @@ module.exports = function restricted(req, res, next) {
         }
     })
     } else {
-    res.status(400).json({message: 'bad panda. gimme token'})
+    res.status(400).json({message: 'Bad Client Request. Check token'})
     }
 };
