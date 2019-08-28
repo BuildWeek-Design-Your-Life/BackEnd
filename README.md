@@ -28,13 +28,12 @@ Payload: an object with the following, email is optional.
 }
 ```
 
-Returns: an object with user id, username, password, and email. Password will be hashed, ignore it 😄
+Returns: an object with user id, username, and email.
 
 ```
 {
     "id": 1,
     "username": "Jane",
-    "password": "hashed",
     "email": "janedoe@gmail.com"
 }
 ```
@@ -52,11 +51,13 @@ Payload: an object with the following, email is optional.
 }
 ```
 
-Returns: an object with a message and authentication token. Save this token to local storage(or similar), this token will be required for all CRUD requests below.
+Returns: an object with a id, username, email and authentication token. Save this token to local storage(or similar), this token will be required for all CRUD requests below.
 
 ```
 {
-    "message": "Welcome Jane!",
+    "id": 1,
+    "username": "Jane",
+    "email": "Jane@gmail.com",
     "token": "keeping it secret!"
 }
 ```

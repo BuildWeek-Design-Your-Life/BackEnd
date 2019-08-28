@@ -56,7 +56,7 @@ server.post('/', restricted, async(req, res) => {
 server.put('/:id', restricted, async(req, res) => {
     try {
         const { id } = req.params;
-        let {users_ref_id, trends, insights, summary} = req.body
+        let {users_act_id, activity, engagement, energize} = req.body
         if ( id && req.body ) {
             const store = await Users.UserAct(id)
             const updatedLog = await Users.update(id, req.body)
