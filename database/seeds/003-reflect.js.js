@@ -10,4 +10,4 @@ exports.seed = function(knex) {
         {users_ref_id: 1, trends: "I can hold my breath longer", insights: "I like my lungs are getting stronger", summary: "My cardio seems to be improving if I swim everyday"},
       ]);
     });
-};
+}
